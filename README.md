@@ -80,3 +80,20 @@ The system streams through the EEG data in windows, extracts features, and predi
 ## Authors
 
 - Bhoj Raj Thapa
+
+### Citation Requirement
+
+If you use this code or methodology in your research or work, please cite this repository:
+
+```
+@misc{thapa2024_realtime_eeg_pmid,
+  author = {Thapa, Bhoj Raj},
+  title = {Real-time Pre-movement Intention Detection using EEG},
+  year = {2024},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/anzanthapa/2024_RealtimePremovementDetection_EEG}}
+}
+```
+
+You are required to acknowledge the source and provide appropriate attribution when using, modifying, or distributing this work.        
