@@ -4,7 +4,9 @@
 
 This repository implements a complete pipeline for detecting a subject's
 intention to move before the actual motion onset, using scalp EEG
-recordings drawn from a publicly‑available dataset.
+recordings drawn from a publicly‑available dataset.  **The codebase is
+still under active development; features may change as the project
+evolves.**
 
 The source data originate from a study published in *Scientific Data*
 (Nature) and are freely accessible at
