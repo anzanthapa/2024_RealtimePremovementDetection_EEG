@@ -4,7 +4,15 @@
 
 This repository implements a complete pipeline for detecting a subject's
 intention to move before the actual motion onset, using scalp EEG
-recordings.  The workflow is divided into three major stages:
+recordings drawn from a publicly‑available dataset.
+
+The source data originate from a study published in *Scientific Data*
+(Nature) and are freely accessible at
+https://www.nature.com/articles/sdata2018211.  These movement‑intention
+records form the basis for both the offline training and the real‑time
+GUI demonstration.
+
+The workflow is divided into three major stages:
 
 1. **Data preprocessing and epoching** – raw `.mat` files are parsed,
    average-mastoid re-referenced and segmented around movement-related
