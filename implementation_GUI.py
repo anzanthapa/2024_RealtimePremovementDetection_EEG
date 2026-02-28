@@ -6,7 +6,7 @@ intention detector visually.
 
 Created on Fri Mar 29 00:10:01 2024
 
-@author: anzan
+@author: anzanthapa
 """
 
 import os
