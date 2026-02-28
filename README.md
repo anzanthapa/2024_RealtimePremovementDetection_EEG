@@ -124,7 +124,7 @@ from the author.  The full license text is provided below and also stored
 in the `LICENSE` file at the project root.
 
 ```
-Copyright (c) 2024 Bhoj Raj Thapa
+Copyright (c) 2026 Bhoj Raj Thapa
 
 All rights reserved. This repository and its contents are the original work
 of the author. No part of this code or documentation may be used, modified,
