@@ -120,12 +120,25 @@ These can be imported wherever custom processing is required.
 This project and all accompanying code are the original work of the
 author.  **All rights reserved.**  You may not use, copy, modify, or
 redistribute any part of this repository without express written permission
-from the author.  All licensing information is contained in this README.
+from the author.  The full license text is provided below and also stored
+in the `LICENSE` file at the project root.
+
+```
+Copyright (c) 2024 Bhoj Raj Thapa
+
+All rights reserved. This repository and its contents are the original work
+of the author. No part of this code or documentation may be used, modified,
+reproduced, or distributed in any form without prior written permission from
+the author. Unauthorized use is prohibited.
+```
 
 ## Citation
 
-If you reference or build upon this work, please acknowledge the
-repository as follows:
+If you cite or otherwise mention results obtained using **this code**
+(licensing applies to the implementation; the raw EEG dataset has its own
+terms and attribution – see the original Nature article), please acknowledge
+the repository as follows (reuse or modification of the code requires prior
+written permission):
 
 ```bibtex
 @misc{thapa2024_realtime_eeg_pmid,
