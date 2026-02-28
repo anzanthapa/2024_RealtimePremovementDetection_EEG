@@ -115,6 +115,13 @@ These can be imported wherever custom processing is required.
 
 - Bhoj Raj Thapa (GitHub: **anzanthapa**)
 
+## License
+
+This project and all accompanying code are the original work of the
+author.  **All rights reserved.**  You may not use, copy, modify, or
+redistribute any part of this repository without express written permission
+from the author.  All licensing information is contained in this README.
+
 ## Citation
 
 If you reference or build upon this work, please acknowledge the
