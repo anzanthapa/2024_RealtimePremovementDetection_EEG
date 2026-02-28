@@ -6,7 +6,7 @@ general-purpose file importer.
 
 Created on Thu Sep 21 19:46:07 2023
 
-@author: anzanthapa
+@author: Bhoj Raj Thapa
 """
 
 import numpy as np

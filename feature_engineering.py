@@ -9,7 +9,7 @@ models, and writes various diagnostic plots.
 
 Created on Thu Sep 14 21:07:35 2023
 
-@author: anzanthapa
+@author: Bhoj Raj Thapa
 """
 
 from __future__ import annotations
