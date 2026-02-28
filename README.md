@@ -2,90 +2,117 @@
 
 ## Project Overview
 
-This project implements a real-time system for detecting pre-movement intention from EEG signals using machine learning. The system processes EEG data, extracts relevant features, trains a Support Vector Machine (SVM) classifier, and provides a graphical user interface (GUI) for real-time prediction and visualization.
+This repository implements a complete pipeline for detecting a subject's
+intention to move before the actual motion onset, using scalp EEG
+recordings.  The workflow is divided into three major stages:
 
-The methodology involves:
-- EEG signal preprocessing (average mastoid re-referencing)
-- Feature extraction including Event-Related Potentials (ERP), Power Spectral Density (PSD), Autocorrelation, and Low-Pass Filtered ERP
-- SVM classification with hyperparameter tuning
-- Real-time streaming and prediction through a PyQt5-based GUI
+1. **Data preprocessing and epoching** – raw `.mat` files are parsed,
+   average-mastoid re-referenced and segmented around movement-related
+   markers.
+2. **Feature engineering & model building** – epochs are converted into
+   ERP waveforms, band‑power (PSD), autocorrelation patterns and low‑pass
+   filtered ERP.  A linear SVM is trained over all feature-set
+   combinations to identify the best predictor.
+3. **Interactive demonstration** – a PyQt5 GUI streams stored EEG
+   recordings in windowed chunks, extracts features on the fly and
+   displays real-time predictions from the trained classifier.
+
+Key characteristics:
+
+- Offline training with persistent diagnostic plots (ERP / band power)
+- Simple, pipeline-friendly code structure for easy modification
+- Lightweight real-time simulator supporting pause/continue control
 
 ## Features
 
-- **EEG Data Processing**: Load and process .mat files containing EEG signals and markers
-- **Feature Engineering**: Extract multiple types of features from EEG epochs
-- **Model Training**: Train and evaluate SVM models with different feature combinations
-- **Real-time Detection**: GUI for loading EEG data and performing live predictions
-- **Visualization**: Plot EEG signals and prediction results over time
-- **Data Streaming**: Simulate real-time data streaming with pause/continue functionality
+- **Modular preprocessing**
+  - epoch extraction with adjustable start/end times
+  - automatic mastoid re-referencing and optional low-pass filtering
+- **Multiple feature modalities**
+  - raw ERP traces
+  - frequency‑band powers (Delta–Gamma)
+  - autocorrelation profiles
+  - low‑pass ERP after 8 Hz filtering
+- **Model evaluation**
+  - exhaustive search over four binary feature inclusion flags
+  - linear SVM with train/validation split and accuracy reporting
+  - best pipeline saved to disk for later use
+- **GUI streaming**
+  - selectable input file dialog
+  - scrolling EEG plot with channel labels
+  - prediction widget showing true vs. forecast labels
+  - simple data stream abstraction for fixed-size windows
 
 ## Installation
 
-### Prerequisites
-
-- Python 3.7+
-- Required packages (install via pip):
-
-```bash
-pip install numpy scipy joblib PyQt5 matplotlib scikit-learn pandas
-```
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/anzanthapa/2024_RealtimePremovementDetection_EEG.git
+   cd 2024_RealtimePremovementDetection_EEG
+   ```
+2. Create and activate a Python virtual environment (recommended):
+   ```bash
+   python -m venv venv
+   source venv/Scripts/activate    # Windows
+   ```
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+   *(alternatively: `pip install numpy scipy joblib PyQt5 matplotlib scikit-learn pandas`)*
 
 ## Usage
 
-### 1. Feature Engineering and Model Training
+### 1. Run preprocessing & training
 
-Run `feature_engineering_v01.py` to:
-- Process raw EEG data files
-- Extract and visualize features
-- Train SVM models with different feature combinations
-- Save the best performing model
+- Ensure raw `.mat` files are placed under `data/raw/`.
+- Execute
+  ```bash
+  python feature_engineering.py
+  ```
+- The script will:
+  * iterate over all subjects/files in the raw directory
+  * compute epochs and the four feature sets for each epoch
+  * build and evaluate a linear SVM over every feature combination
+  * save the best-performing factory pipeline to
+    `results/models/best_linear_SVM.pkl`
+  * dump diagnostic PDFs (`averageERP_*.pdf`, `averageBP_raw.pdf`)
+    under `results/<subject>/`
 
-```bash
-python feature_engineering_v01.py
-```
+### 2. Launch the GUI
 
-This script will:
-- Load .mat files from `data/raw/`
-- Perform average mastoid re-referencing
-- Extract epochs around event markers
-- Compute features (ERP, PSD, Autocorrelation, LPFERP)
-- Train linear SVM with various feature combinations
-- Save the best model to `results/models/best_linear_SVM.pkl`
-- Generate visualization PDFs in `results/`
+- Run the graphical demo:
+  ```bash
+  python implementation_GUI.py
+  ```
+- Controls:
+  * **Load EEG Signal** – choose a `.mat` dataset
+  * **Pause / Continue** – stop/resume the streaming iterator
+  * **Exit** – close the application
+- The application processes the data in 150‑sample windows and feeds
+  features to the stored SVM, displaying predictions alongside true
+  labels.
 
-### 2. Real-time GUI Application
+### 3. Utilities
 
-Run `implementation_GUI.py` to launch the GUI:
+- `utils.py` exports:
+  * `extract_epochs()` – window slicing helper
+  * `compute_features()` – handles ERP/PSD/autocorr/entropy
+  * `extract_features()` – builds combined feature vectors
+  * `importdata()` – generic CSV reader with transpose
 
-```bash
-python implementation_GUI.py
-```
-
-The GUI provides:
-- **Load EEG Signal**: Select a .mat file for analysis
-- **EEG Plot**: Real-time visualization of EEG channels
-- **Prediction Display**: True vs Predicted labels over time
-- **Controls**: Pause/Continue streaming, Exit
-
-The system streams through the EEG data in windows, extracts features, and predicts pre-movement intention using the trained SVM model.
-
-### 3. Utility Functions
-
-`utils.py` contains helper functions for:
-- Epoch extraction from continuous EEG data
-- Feature computation (ERP, PSD, Autocorrelation, Entropy)
-- Feature combination extraction
-- Data import from .dat/.csv files
+These can be imported wherever custom processing is required.
 
 ## Authors
 
-- Bhoj Raj Thapa
+- Bhoj Raj Thapa (GitHub: **anzanthapa**)
 
-### Citation Requirement
+## Citation
 
-If you use this code or methodology in your research or work, please cite this repository:
+If you reference or build upon this work, please acknowledge the
+repository as follows:
 
-```
+```bibtex
 @misc{thapa2024_realtime_eeg_pmid,
   author = {Thapa, Bhoj Raj},
   title = {Real-time Pre-movement Intention Detection using EEG},
@@ -96,4 +123,5 @@ If you use this code or methodology in your research or work, please cite this r
 }
 ```
 
-You are required to acknowledge the source and provide appropriate attribution when using, modifying, or distributing this work.        
+Greater detail and attribution information can be found in the source
+headers.

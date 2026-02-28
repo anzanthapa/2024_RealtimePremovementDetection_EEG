@@ -14,7 +14,6 @@ import pandas as pd
 import warnings
 from scipy import signal, stats
 
-
 def IMAEEG(eeg_data):
     """Placeholder for integrated moving average EEG feature.
 
